@@ -1,4 +1,7 @@
 {
-  "entrypoints" : ["https://belgium.linkedconnections.org/delijn/Oost-Vlaanderen/connections"],
-  "enableCache" : true
+  "entrypoints" : ["https://belgium.linkedconnections.org/delijn/West-Vlaanderen/connections"],
+  "enableCache" : true,
+  "departureTime": "2018-09-13T13:12:28.000Z",
+  "departureStop": "https://data.delijn.be/stops/502032",
+  "arrivalStop": "https://data.delijn.be/stops/502326"
 }

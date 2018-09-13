@@ -57,7 +57,7 @@ client.timespanQuery(q, function (stream, source, connectionsStream) {
   var httpStartTimes = {};
   var httpResponseTimes = {};
   var paths = [];
-  
+
   source.on('request', function (url) {
     httpStartTimes[url] = new Date();
   });
@@ -77,9 +77,9 @@ client.timespanQuery(q, function (stream, source, connectionsStream) {
   });
   stream.on('result', function (path) {
     paths.push(path);
-    console.log('-------------------------------------------')
+    //console.log('-------------------------------------------')
     //console.log(path);
-    /*path.forEach(function (connection) {
+    path.forEach(function (connection) {
       console.log(connection.departureTime.toISOString() + " at " + connection.departureStop + " To arrive in " + connection.arrivalStop + " at " + connection.arrivalTime.toISOString());
       if (connection["gtfs:trip"]) {
         console.log(" with trip id " + JSON.stringify(connection["gtfs:trip"]));
@@ -96,7 +96,7 @@ client.timespanQuery(q, function (stream, source, connectionsStream) {
       sumResponseTimes += httpResponseTimes[url];
     }
     console.log("Downloading data over HTTP adds up to", sumResponseTimes, "ms");
-    console.log(Math.round(totalBytesTransfered / (1024 * 1024) * 100) / 100 + "MB transfered while answering this query");*/
+    console.log(Math.round(totalBytesTransfered / (1024 * 1024) * 100) / 100 + "MB transfered while answering this query");
   });
   /*stream.on('end', () => {
     console.log('**********************RESULTS: \n');
@@ -104,7 +104,7 @@ client.timespanQuery(q, function (stream, source, connectionsStream) {
       console.log('-------------------------------------------')
       console.log(JSON.stringify(path));
     });
-  });*/
+});*/
   stream.on('error', function (error) {
     console.error(error);
   });

@@ -1,0 +1,1 @@
+lcc -c config-example.json '{"arrivalStop" : "https://data.delijn.be/stops/502326", "departureStop" : "https://data.delijn.be/stops/502032", "departureTime": "2018-09-13T13:12:28.000Z"}'

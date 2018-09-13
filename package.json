@@ -29,14 +29,15 @@
   "dependencies": {
     "async": "^1.5.2",
     "commander": "^2.10.0",
+    "csa": "https://github.com/linkedconnections/csa.js#tripscore-dev",
     "ldfetch": "^0.0.3",
     "merge-sort-stream": "^1.0.5",
     "moment": "^2.12.x",
     "n3": "^0.10.0",
+    "npm": "^6.4.1",
     "path": "^0.12.7",
     "q": "^1.4.1",
     "uritemplate": "^0.3.4",
-    "wreck": "^7.2.0",
-    "csa": "https://github.com/linkedconnections/csa.js#tripscore-dev"
+    "wreck": "^7.2.0"
   }
 }

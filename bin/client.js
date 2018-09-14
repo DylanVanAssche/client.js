@@ -37,7 +37,7 @@ config.options = options;
 let depTime = new Date(q.departureTime);
 depTime.setHours(depTime.getHours() + 2);
 q['latestDepartTime'] = depTime;
-q['minimumTransferTime'] = 6 * 60;
+q['minimumTransferTime'] = 60;
 q['searchTimeOut'] = 300000;
 
 console.log(JSON.stringify(q));
@@ -51,8 +51,8 @@ client._http.on('downloaded', function (download) {
   totalBytesTransfered += download.totalBytes;
 });
 
+client.query(q, function (stream, source, connectionsStream) {
 //client.timespanQuery(q, function (stream, source, connectionsStream) {
-/*client.timespanQuery(q, function (stream, source, connectionsStream) {
   console.log('Querying ' + config.entrypoints.length + ' data source(s).');
   var httpStartTimes = {};
   var httpResponseTimes = {};
@@ -77,65 +77,6 @@ client._http.on('downloaded', function (download) {
   });
   stream.on('result', function (path) {
     paths.push(path);
-    console.log('-------------------------------------------')
-    //console.log(path);
-    path.forEach(function (connection) {
-      console.log(connection.departureTime.toISOString() + " at " + connection.departureStop + " To arrive in " + connection.arrivalStop + " at " + connection.arrivalTime.toISOString());
-      if (connection["gtfs:trip"]) {
-        console.log(" with trip id " + JSON.stringify(connection["gtfs:trip"]));
-      }
-      if (connection["gtfs:headsign"]) {
-        console.log(" with headsign " + JSON.stringify(connection["gtfs:headsign"]));
-      }
-    });
-    var duration = ((path[path.length - 1].arrivalTime.getTime() - path[0].departureTime.getTime()) / 60000);
-    console.log("Duration of the journey is: " + duration + " minutes");
-    console.log("To calculate, we have built a minimum spanning tree with " + count + " connections, while we relaxed " + countTotal + " connections in total.");
-    var sumResponseTimes = 0;
-    for (var url in httpResponseTimes) {
-      sumResponseTimes += httpResponseTimes[url];
-    }
-    console.log("Downloading data over HTTP adds up to", sumResponseTimes, "ms");
-    console.log(Math.round(totalBytesTransfered / (1024 * 1024) * 100) / 100 + "MB transfered while answering this query");
-  });
-  stream.on('end', () => {
-    console.log('**********************RESULTS: \n');
-    paths.forEach((path) => {
-      console.log('-------------------------------------------')
-      console.log(JSON.stringify(path));
-    });
-  });
-  stream.on('error', function (error) {
-    console.error(error);
-  });
-});*/
-
-client.basicQuery(q, function(stream, source, connectionsStream) {
-  console.log('Querying ' + config.entrypoints.length + ' data source(s).');
-  var httpStartTimes = {};
-  var httpResponseTimes = {};
-  var paths = [];
-  
-  source.on('request', function (url) {
-    httpStartTimes[url] = new Date();
-  });
-  source.on('redirect', function (obj) {
-    httpStartTimes[obj.to] = httpStartTimes[obj.from];
-    //console.log('Redirect from: ' + obj.from + ' to: ' + obj.to);
-  });
-  source.on('response', function (url) {
-    httpResponseTimes[url] = new Date() - httpStartTimes[url];
-    console.log('GET', url, '-', httpResponseTimes[url], 'ms');
-  });
-  connectionsStream.on('data', function (data) {
-    countTotal++;
-  });
-  stream.on('data', function () {
-    count++;
-  });
-  stream.on('result', function (path) {
-    paths.push(path);
-    console.log('-------------------------------------------')
     console.log(path);
     /*path.forEach(function (connection) {
       console.log(connection.departureTime.toISOString() + " at " + connection.departureStop + " To arrive in " + connection.arrivalStop + " at " + connection.arrivalTime.toISOString());
@@ -152,11 +93,18 @@ client.basicQuery(q, function(stream, source, connectionsStream) {
     var sumResponseTimes = 0;
     for (var url in httpResponseTimes) {
       sumResponseTimes += httpResponseTimes[url];
-    }*/
+    }
     console.log("Downloading data over HTTP adds up to", sumResponseTimes, "ms");
-    console.log(Math.round(totalBytesTransfered / (1024 * 1024) * 100) / 100 + "MB transfered while answering this query");
+    console.log(Math.round(totalBytesTransfered / (1024 * 1024) * 100) / 100 + "MB transfered while answering this query");*/
   });
+  /*stream.on('end', () => {
+    console.log('**********************RESULTS: \n');
+    paths.forEach((path) => {
+      console.log('-------------------------------------------')
+      console.log(JSON.stringify(path));
+    });
+  });*/
   stream.on('error', function (error) {
     console.error(error);
   });
-})
+});
